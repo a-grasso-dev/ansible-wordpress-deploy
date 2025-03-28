@@ -1,0 +1,27 @@
+name: devops2025
+
+services:
+
+    ##########
+    # System #
+    ##########
+
+    system:
+        hostname: devops2025
+        build:
+            context: ..
+            dockerfile: docker/Dockerfile
+        image: devops2025:20250116155451
+        pull_policy: never
+        volumes:
+            - ../..:${MANALA_DIR}
+        environment:
+            MANALA_DIR: ${MANALA_DIR}
+            MANALA_CACHE_DIR: ${MANALA_CACHE_DIR}
+        working_dir: ${MANALA_DIR}
+        networks:
+          - network
+
+networks:
+  network:
+    name: devops2025

@@ -1,0 +1,9 @@
+stage: staging
+motd:
+  message: "Environnement de staging" 
+
+php:
+  config:
+    error_reporting: 'E_ALL & ~E_DEPRECATED & ~E_STRICT'
+    display_errors: False
+    memory_limit: 256M

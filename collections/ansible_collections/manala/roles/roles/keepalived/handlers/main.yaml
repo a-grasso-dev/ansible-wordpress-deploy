@@ -1,0 +1,15 @@
+---
+
+- name: Restart keepalived
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - keepalived
+
+- name: Reload keepalived
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: reloaded
+  loop:
+    - keepalived

@@ -1,0 +1,21 @@
+---
+
+- name: Restart networking
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - networking
+
+- name: Generate netplan
+  ansible.builtin.command:
+    cmd: netplan generate
+  changed_when: true
+  notify:
+    - Apply netplan
+
+- name: Apply netplan
+  ansible.builtin.command:
+    cmd: netplan apply
+  changed_when: true
+  when: manala_network_netplan_configs_apply

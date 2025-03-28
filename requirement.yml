@@ -1,0 +1,10 @@
+---
+
+  roles:
+    - name: manala.zsh
+      version: 2.0.1
+
+  collections:
+    - name: manala.roles
+      version: 4.4.0
+

@@ -1,0 +1,15 @@
+---
+
+- name: Restart sensu-backend
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - sensu-backend
+
+- name: Restart sensu-agent
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - sensu-agent

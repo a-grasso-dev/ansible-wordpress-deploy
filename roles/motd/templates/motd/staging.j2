@@ -1,0 +1,17 @@
+#!/bin/sh
+{% set message = motd.message -%}
+
+MOTD=$(cat <<'EOF'
+ -{% for i in range(message | length) %}-{% endfor %}-
+< {{ message }} >
+ -{% for i in range(message | length) %}-{% endfor %}-
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\\
+                ||----w |
+                ||     ||
+
+EOF
+)
+
+printf "${MOTD}\n\n\n"

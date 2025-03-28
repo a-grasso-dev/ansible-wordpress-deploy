@@ -1,0 +1,38 @@
+---
+
+- name: Restart php fpm
+  ansible.builtin.command:
+    cmd: /usr/sbin/php-fpm{{ manala_php_version | string }} -t
+  when: |
+    'fpm' in query(
+      'manala.roles.php_sapis',
+      manala_php_sapis | default(manala_php_sapis_default, True),
+      manala_php_sapis_available,
+      wantstate='present',
+      wantmap=true
+    )
+  changed_when: true
+  notify:
+    - Do restart php fpm
+
+- name: Do restart php fpm
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - php{{ manala_php_version | string }}-fpm
+  when: |
+    'fpm' in query(
+      'manala.roles.php_sapis',
+      manala_php_sapis | default(manala_php_sapis_default, True),
+      manala_php_sapis_available,
+      wantstate='present',
+      wantmap=true
+    )
+
+- name: Restart php blackfire agent
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - blackfire-agent

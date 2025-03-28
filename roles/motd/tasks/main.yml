@@ -1,0 +1,7 @@
+- name: MOTD > Installing template
+  ansible.builtin.template:
+    src: "motd/{{ stage }}.j2"
+    dest: "/etc/update-motd.d/10-welcome"
+    owner: root
+    group: root
+    mode: "0755"

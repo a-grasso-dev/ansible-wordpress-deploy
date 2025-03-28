@@ -1,0 +1,6 @@
+{# PHP custom configuration, handle by Ansible #} 
+{%- set config = php.config|default({}) -%}
+
+{% for key, value in config.items() %}
+  {{ key }} = {{ value }}
+{% endfor %}

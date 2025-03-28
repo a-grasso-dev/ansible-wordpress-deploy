@@ -1,0 +1,8 @@
+---
+
+- name: Restart maxscale
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - maxscale

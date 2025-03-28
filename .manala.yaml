@@ -1,0 +1,53 @@
+####################################################################
+# !!! REMINDER !!!                                                 #
+# Don't forget to run `manala up` each time you update this file ! #
+####################################################################
+
+manala:
+    recipe: lazy.ansible
+
+###########
+# Project #
+###########
+
+project:
+    name: devops2025
+
+##########
+# System #
+##########
+
+system:
+    # env_file:
+    #     - .env
+    #     - path: .env.local
+    #       required: false
+    # apt:
+    #     packages:
+    #         - nano
+    git:
+        config: |
+            # Silence false positive dubious ownership errors
+            #[safe]
+            #directory = *
+    ssh:
+        config: |
+            Host *
+                User devops
+                ForwardAgent yes
+    ansible:
+        version: 2.17.4
+        config: |
+            [defaults]
+            #force_color = True
+            #retry_files_enabled = False
+            [ssh_connection]
+            # Improve performance
+            #pipelining = True
+            # Avoid issues on ssh too long socket path and/or invalid permissions
+            #control_path_dir = /tmp/ansible/cp
+        # dependencies:
+        #     # Collection community.docker
+        #     - docker==6.0.1
+        #     # Collection community.hashi_vault
+        #     - hvac==1.1.0
