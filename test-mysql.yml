@@ -1,0 +1,8 @@
+---
+- name: Test du rôle mysql
+  hosts: server-01
+  become: yes
+  collections:
+    - community.mysql
+  roles:
+    - mysql

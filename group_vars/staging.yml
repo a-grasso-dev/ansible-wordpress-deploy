@@ -7,3 +7,8 @@ php:
     error_reporting: 'E_ALL & ~E_DEPRECATED & ~E_STRICT'
     display_errors: False
     memory_limit: 256M
+
+mysql:
+  db_name: wp_staging
+  user: wp_user_staging
+  password: "azerty"

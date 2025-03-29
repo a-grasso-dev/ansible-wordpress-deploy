@@ -15,3 +15,10 @@ include .manala/Makefile
 # 	ansible-galaxy install \
 # 		--verbose \
 # 		-r requirements.yaml
+
+# ## Ansible - Installation des collections nécessaires
+setup.ansible:
+	ansible-galaxy collection install -r collections/requirements.yml --collections-path ./collections
+
+# ## Projet - Initialisation complète
+setup: setup.ansible
