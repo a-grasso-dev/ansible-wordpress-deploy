@@ -1,0 +1,21 @@
+server {
+    listen 80;
+    root /srv/app/;
+    index index.php;
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ /index.php?query_string;
+    }
+
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_index index.php;
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+    }
+
+    error_log /var/log/nginx/wordpress_error.log;
+    access_log /var/log/nginx/wordpress_access.log;
+}
