@@ -11,14 +11,14 @@
     dest: /etc/nginx/sites-available/wordpress.conf
   notify: Restart nginx
 
-- name: Activer le site Wordpress
+- name: Activer la configuration Nginx pour WordPress
   file:
     src: /etc/nginx/sites-available/wordpress.conf
     dest: /etc/nginx/sites-enabled/wordpress.conf
     state: link
     force: yes
 
-- name: Supprimer le site par défaut
+- name: Supprimer le site par défaut de Nginx
   file:
     path: /etc/nginx/sites-enabled/default
     state: absent
