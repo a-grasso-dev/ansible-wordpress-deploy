@@ -1,0 +1,6 @@
+---
+- name: Test du rôle php
+  hosts: production
+  become: yes
+  roles:
+    - php

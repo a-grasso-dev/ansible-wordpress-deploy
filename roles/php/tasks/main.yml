@@ -1,0 +1,34 @@
+---
+- name: Installer PHP et extensions nécessaires
+  apt:
+    name:
+      - php{{ php_version }}
+      - php{{ php_version }}-fpm
+      - php{{ php_version }}-mysql
+      - php{{ php_version }}-cli
+    state: present
+    update_cache: yes
+
+- name: Créer le dossier de l'application s'il n'existe pas
+  file:
+    path: /srv/app
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: Créer une page PHP de test
+  copy:
+    dest: /srv/app/index.php
+    content: |
+      <?php
+      phpinfo();
+    owner: www-data
+    group: www-data
+    mode: '0644'
+
+- name: S'assurer que PHP-FPM est lancé
+  service:
+    name: php{{ php_version }}-fpm
+    state: started
+    enabled: yes
