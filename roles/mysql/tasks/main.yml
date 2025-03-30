@@ -16,7 +16,7 @@
     state: started
     enabled: yes
 
-- name: Installer le connecteur PyMySQL (recommandé)
+- name: Installer le connecteur PyMySQL
   apt:
     name: python3-pymysql
     state: present

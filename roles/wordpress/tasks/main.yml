@@ -1,0 +1,42 @@
+---
+- name: Installer git (nécessaire pour cloner WordPress)
+  apt:
+    name: git
+    state: present
+    update_cache: yes
+    
+- name: Supprimer /srv/app s'il existe
+  file:
+    path: /srv/app
+    state: absent
+
+- name: Cloner WordPress depuis le dépôt GitHub officiel
+  git:
+    repo: https://github.com/WordPress/WordPress.git
+    dest: /srv/app
+    version: master
+    force: yes
+  notify:
+    - Restart PHP-FPM
+    - Restart Nginx
+
+- name: Supprimer l'ancien connect.php si présent
+  file:
+    path: /srv/app/connect.php
+    state: absent
+
+- name: Générer le fichier wp-config.php
+  template:
+    src: wp-config.php.j2
+    dest: /srv/app/wp-config.php
+    owner: www-data
+    group: www-data
+    mode: '0644'
+
+- name: Donner les droits à www-data
+  file:
+    path: /srv/app
+    state: directory
+    recurse: yes
+    owner: www-data
+    group: www-data

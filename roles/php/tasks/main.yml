@@ -2,6 +2,7 @@
 - name: Installer PHP et extensions nécessaires
   apt:
     name:
+      - php
       - php{{ php_version }}
       - php{{ php_version }}-fpm
       - php{{ php_version }}-mysql
@@ -9,24 +10,10 @@
     state: present
     update_cache: yes
 
-- name: Créer le dossier de l'application s'il n'existe pas
-  file:
-    path: /srv/app
-    state: directory
-    owner: www-data
-    group: www-data
-    mode: '0755'
-
-- name: Créer une page PHP de test
-  copy:
-    dest: /srv/app/index-php.php
-    content: |
-      <?php
-      phpinfo();
-
-    owner: www-data
-    group: www-data
-    mode: '0644'
+- name: Installer le connecteur PyMySQL
+  apt:
+    name: python3-pymysql
+    state: present
 
 - name: S'assurer que PHP-FPM est lancé
   service:

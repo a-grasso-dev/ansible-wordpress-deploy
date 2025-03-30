@@ -8,3 +8,4 @@
     - { role: php, tags: php }
     - { role: mysql, tags: mysql }
     - { role: app-test, tags: app-test }
+    - { role: wordpress, tags: wordpress }
