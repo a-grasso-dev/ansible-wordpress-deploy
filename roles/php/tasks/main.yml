@@ -19,7 +19,7 @@
 
 - name: Créer une page PHP de test
   copy:
-    dest: /srv/app/index.php
+    dest: /srv/app/index-php.php
     content: |
       <?php
       phpinfo();
