@@ -20,11 +20,6 @@
     - Restart PHP-FPM
     - Restart Nginx
 
-- name: Supprimer l'ancien connect.php si présent
-  file:
-    path: /srv/app/connect.php
-    state: absent
-
 - name: Générer le fichier wp-config.php
   template:
     src: wp-config.php.j2
