@@ -2,19 +2,19 @@
 
 Ce projet vise à automatiser le déploiement d'un applicatif entier Wordpress sur des machines Debian.
 
-## En développement, deux machines virtuelles sous Debian ont été utilisées :
-  - server-01 (production) - adresse ip : 192.168.95.129
-  - server-02 (staging) - adresse ip : 192.168.95.130
+## En développement, deux machines virtuelles sous Debian ont été utilisées
+  - server-01 (production) - adresse IP : 192.168.95.129
+  - server-02 (staging) - adresse IP : 192.168.95.130
 
 > ⚠️ Dans cette documentation, les adresses IP ci-dessus sont utilisées à titre d'exemple. Pensez à adapter ces adresses en fonction de vos propres serveurs.
 
-## Environnement de développement :
+## Environnement de développement
 - WSL Ubuntu sous Windows
 - IDE : Visual Studio Code
 - Déploiement automatisé via Ansible
 - Versionning : Git et Gilab
 
-## Services déployés :
+## Services déployés
 
 - Serveur web : Nginx
 - Serveur PHP : PHP-FPM
@@ -45,44 +45,41 @@ Ce projet vise à automatiser le déploiement d'un applicatif entier Wordpress s
 
 ## Prérequis pour les accès aux serveurs
 
-1. Repérer l'adresse IP attribuée à chaque serveur Debian 
-```bash
-ip a | grep inet
-```
-2. Adapter le fichier `inventories/hosts.yml` :
+1. Adapter l'adresse IP attribuée à chaque serveur dans `inventories/hosts.yml` 
 
-```yaml
-all:
-  hosts:
-    server-01:
-      ansible_host: 192.168.95.129
-      ansible_user: ansible
-    server-02:
-      ansible_host: 192.168.95.130
-      ansible_user: ansible
-```
-
-3. Vérifier et créer, si nécessaire, une clé SSH publique :
+2. Vérifier et créer, si nécessaire, une clé SSH publique :
 ```bash
 ls ~/.ssh/id_rsa.pub
 ssh-keygen -t rsa -b 4096
 ```
 
-4. Ajouter la clé sur chaque serveur :
+3. Ajouter la clé sur chaque serveur :
 ```bash
 ssh-copy-id ansible@192.168.95.129
 ssh-copy-id ansible@192.168.95.130
 ```
 
-5. Démarrer l’agent SSH et charger la clé privée :
+4. Démarrer l’agent SSH et charger la clé privée :
 ```bash
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 ```
-
+5. Démarrer l’environnement shell Ansible
+```bash
+make sh
+```
 
 ## Playbooks
 
+> ⚠️ Au lancement des playbooks valider la connexion des deux serveurs
+
+```bash
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+yes
+ok: [server-02]
+yes
+ok: [server-01]
+```
 ### Lancer le déploiement complet (tous les rôles, toutes les machines)
 
 ```bash
