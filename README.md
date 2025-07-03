@@ -128,13 +128,7 @@ Nom : Grasso
 
 Prénom : Andrea
 
-E-mail : [andrea.grasso@etu.univ-lyon1.fr](mailto\:andrea.grasso@etu.univ-lyon1.fr)
-
-Numéro étudiant : p2413874
-
 ## Repositorys
 
-- [Dépot du projet](https://forge.univ-lyon1.fr/p2413874/ansible-wordpress-deploy)
-
-- [Cahier des charges](https\://forge.univ-lyon1.fr/iut-lyon-devops-ansible/ansible-project)
+- [Dépot du projet](https://github.com/a-grasso-dev/ansible-wordpress-deploy)
 
